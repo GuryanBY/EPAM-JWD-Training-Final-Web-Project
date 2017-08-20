@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.epam.kgd.victory.dao.query_builder.update.UpdateQueryBuilder;
 import com.epam.kgd.victory.dao.query_builder.update.UpdateQueryBuilderImpl;
 
-public class UpdateQueryBuilderJunitTest {
+public class UpdateQueryBuilderJUnitTest {
 	private static UpdateQueryBuilder updateBuilder;
 	private String expectedQuery ="UPDATE `user` SET `u_role_id`=?, `u_login`=?, `u_password`=?, `u_first_name`=?, `u_last_name`=?, `u_email`=?, `u_phone`=?, `u_registr_date`=?, `u_status`=? WHERE `u_id`=?";
 	

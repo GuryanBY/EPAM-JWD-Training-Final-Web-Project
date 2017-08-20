@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-public class SelectQueryBuilderJunitTest {
+public class SelectQueryBuilderJUnitTest {
 	private static  SelectQueryBuilder selectBuilder;
 	private String expectedQuery = "SELECT `u_id` FROM `user` WHERE `u_login`=?"; 
 	

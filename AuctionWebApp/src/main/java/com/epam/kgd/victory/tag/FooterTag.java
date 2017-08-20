@@ -16,7 +16,7 @@ public class FooterTag extends TagSupport {
 			out.write("<div id=\"copyright\">");
 			out.write("<div class=\"container\">");
 			out.write("<p class=\"copyright\">");
-			out.write("&copy; Copyright 2017. \"Альфа Аукцион\" разработано ");
+			out.write("&copy; Copyright 2017. \"Alpha auction\" developed by ");
 			out.write("<a href=\"http://www.facebook.com/user/\" rel=\"nofollow\">Guryan</a>.");
 			out.write("</p></div></div>");
 		} catch (IOException e) {

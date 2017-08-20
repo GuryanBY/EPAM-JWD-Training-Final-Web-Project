@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DeleteQueryBuilderJunitTest {
+public class DeleteQueryBuilderJUnitTest {
 	private static  DeleteQueryBuilder deleteBuilder;
 	private String expectedQuery = "DELETE FROM `user` WHERE `u_id`=? AND `u_email`=? AND `u_login`=?";
 

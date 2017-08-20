@@ -18,7 +18,6 @@ public class SQLGoodDAO implements GoodDAO {
 
 	private static final String SQL_TAKE_ALL_GOODS = "SELECT `g_id`, `g_category_id`, `g_condition_id`, `g_name`, `g_description`, `g_price` FROM `good`";
 	private static final String SQL_TAKE_GOOD_BY_ID = "SELECT `g_id`, `g_category_id`, `g_condition_id`, `g_name`, `g_description`, `g_price` FROM `good` WHERE `g_id`=?";
-	private static final String SQL_TAKE_GOODS_IN_LIMIT = "SELECT `g_id`, `g_category_id`, `g_condition_id`, `g_name`, `g_description`, `g_price` FROM `good` WHERE `g_price`>=? AND `g_price`<=? ";
 	private static final String SQL_ADD_GOOD = "INSERT INTO `good` ( `g_category_id`, `g_condition_id`, `g_name`, `g_description`, `g_price`) VALUES ( ?, ?, ?, ?, ?)";
 	private static final String SQL_DELETE_GOOD = "DELETE FROM `good` WHERE `g_id`=?";
 	private static final String SQL_CHANGE_GOOD = "UPDATE `good` SET `g_category_id`=?, `g_condition_id`=?, `g_name`=?, `g_description`=?, `g_price`=?  WHERE `g_id`=?";
@@ -157,40 +156,6 @@ public class SQLGoodDAO implements GoodDAO {
 			closeResources(resultSet, preparedStatement, connection);
 		}
 
-	}
-
-	@Override
-	public List<Good> goodsInLimit(int minPrice, int maxPrice) throws DAOException {
-		List<Good> result = new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = CONNECTION_POOL.takeConnection();
-			preparedStatement = connection.prepareStatement(SQL_TAKE_GOODS_IN_LIMIT);
-			preparedStatement.setInt(1, minPrice);
-			preparedStatement.setInt(2, maxPrice);
-
-			resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-				Good good = new Good();
-				good.setId(resultSet.getInt(1));
-				good.setCategoryId(resultSet.getInt(2));
-				good.setConditionId(resultSet.getInt(3));
-				good.setName(resultSet.getString(4));
-				good.setDescription(resultSet.getString(5));
-				good.setStartPrice(resultSet.getDouble(6));
-
-				result.add(good);
-
-			}
-		} catch (ConnectionPoolException | SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			closeResources(resultSet, preparedStatement, connection);
-		}
-		return result;
 	}
 
 	@Override
