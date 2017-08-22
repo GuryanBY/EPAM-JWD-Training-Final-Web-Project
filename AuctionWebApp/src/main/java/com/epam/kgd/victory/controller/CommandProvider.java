@@ -30,30 +30,30 @@ import com.epam.kgd.victory.controller.exception.ControllerException;
 public final class CommandProvider {
 
 	/** The constant repository */
-	private final Map<CommandName, Command> repository = new HashMap<>();
+	private final Map<CommandName, Command> commandRepository = new HashMap<>();
 
 	/**
 	 * Instantiates a new command provider.
 	 */
 	CommandProvider() {
 
-		repository.put(CommandName.LOG_IN, new LogIn());
-		repository.put(CommandName.REGISTRATION, new Registration());
-		repository.put(CommandName.ACCOUNT_MAIN_PAGE, new AccountMainPage());
-		repository.put(CommandName.LOCALE, new Locale());
-		repository.put(CommandName.LOG_OUT, new LogOut());
-		repository.put(CommandName.ADD_GOOD, new AddGood());
-		repository.put(CommandName.SHOW_USER_DETAILS, new ShowUserDetails());
-		repository.put(CommandName.DELETE_LOT, new DeleteLot());
-		repository.put(CommandName.SHOW_LOTS_DETAILS, new ShowLotDetails());
-		repository.put(CommandName.CHANGE_LOT_STATUS, new ChangeLotStatus());
-		repository.put(CommandName.BUY_BLITZ_LOT, new BuyBlitzAuction());
-		repository.put(CommandName.CHANGE_USER_STATUS, new ChangeUserStatus());
-		repository.put(CommandName.MAKE_BID, new MakeBid());
-		repository.put(CommandName.BLITZ_AUCTION, new BlitzAuction());
-		repository.put(CommandName.ENGLAND_AUCTION, new EnglandAuction());
-		repository.put(CommandName.INTERNET_AUCTION, new InternetAuction());
-		repository.put(CommandName.MAKE_INTERNET_BID, new MakeInternetBid());
+		commandRepository.put(CommandName.LOG_IN, new LogIn());
+		commandRepository.put(CommandName.REGISTRATION, new Registration());
+		commandRepository.put(CommandName.ACCOUNT_MAIN_PAGE, new AccountMainPage());
+		commandRepository.put(CommandName.LOCALE, new Locale());
+		commandRepository.put(CommandName.LOG_OUT, new LogOut());
+		commandRepository.put(CommandName.ADD_GOOD, new AddGood());
+		commandRepository.put(CommandName.SHOW_USER_DETAILS, new ShowUserDetails());
+		commandRepository.put(CommandName.DELETE_LOT, new DeleteLot());
+		commandRepository.put(CommandName.SHOW_LOTS_DETAILS, new ShowLotDetails());
+		commandRepository.put(CommandName.CHANGE_LOT_STATUS, new ChangeLotStatus());
+		commandRepository.put(CommandName.BUY_BLITZ_LOT, new BuyBlitzAuction());
+		commandRepository.put(CommandName.CHANGE_USER_STATUS, new ChangeUserStatus());
+		commandRepository.put(CommandName.MAKE_BID, new MakeBid());
+		commandRepository.put(CommandName.BLITZ_AUCTION, new BlitzAuction());
+		commandRepository.put(CommandName.ENGLAND_AUCTION, new EnglandAuction());
+		commandRepository.put(CommandName.INTERNET_AUCTION, new InternetAuction());
+		commandRepository.put(CommandName.MAKE_INTERNET_BID, new MakeInternetBid());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public final class CommandProvider {
 	Command getCommand(String name) throws ControllerException {
 		try {
 			CommandName commandName = CommandName.valueOf(name.toUpperCase());
-			return repository.get(commandName);
+			return commandRepository.get(commandName);
 		} catch (IllegalArgumentException | NullPointerException e) {
 			throw new ControllerException("Incorrect command", e);
 		}

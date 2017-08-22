@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.epam.kgd.victory.controller.command.Command;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
 import com.epam.kgd.victory.controller.exception.ControllerException;
-import com.epam.kgd.victory.service.util.JSPPath;
 
 public class Locale implements Command {
 

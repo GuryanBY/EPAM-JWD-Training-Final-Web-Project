@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 
 import com.epam.kgd.victory.bean.User;
+import com.epam.kgd.victory.bean.util.DateConverter;
 import com.epam.kgd.victory.dao.UserDAO;
 import com.epam.kgd.victory.dao.exception.DAOException;
 import com.epam.kgd.victory.dao.pool.ConnectionPool;
@@ -21,13 +21,11 @@ import com.epam.kgd.victory.dao.query_builder.select.SelectQueryBuilder;
 import com.epam.kgd.victory.dao.query_builder.select.SelectQueryBuilderImpl;
 import com.epam.kgd.victory.dao.query_builder.update.UpdateQueryBuilder;
 import com.epam.kgd.victory.dao.query_builder.update.UpdateQueryBuilderImpl;
-import com.epam.kgd.victory.util.DateConverter;
 
 import static com.epam.kgd.victory.dao.query_builder.UserTable.*;
 
 public class SQLUserDAO implements UserDAO {
 
-	static Logger logger = Logger.getLogger(SQLUserDAO.class);
 	
 	private final static SelectQueryBuilder SELECT_BUILDER = SelectQueryBuilderImpl.getInstance();
 	private final static DeleteQueryBuilder DELETE_BUILDER = DeleteQueryBuilderImpl.getInstance(); 
@@ -44,13 +42,11 @@ public class SQLUserDAO implements UserDAO {
 	private static final String SQL_CHANGE_USER = UPDATE_BUILDER.getUpdateQuery(USER_TABLE_NAME.getValue(), USER_UPDATE_ENTITY.getValue(),	BY_ID.getValue());		
 	private static final String SQL_ADD_USER = "INSERT INTO `user` (`u_role_id`, `u_login`, `u_password`, `u_first_name`, `u_last_name`, `u_email`, `u_phone`, `u_registr_date`, `u_status`) VALUES ('2', ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	
 	private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
 	@Override
 	public List<User> getAll() throws DAOException {
-		List<User> result = new ArrayList<>();
-
+		List<User> result = null;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -60,22 +56,7 @@ public class SQLUserDAO implements UserDAO {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(SQL_TAKE_ALL_USERS);
 
-			while (resultSet.next()) {
-				User user = new User();
-				user.setId(resultSet.getInt(1));
-				user.setRoleId(resultSet.getInt(2));
-				user.setLogin(resultSet.getString(3));
-				user.setPassword(resultSet.getString(4));
-				user.setFirstName(resultSet.getString(5));
-				user.setLastName(resultSet.getString(6));
-				user.setEmail(resultSet.getString(7));
-				user.setPhone(resultSet.getString(8));
-				user.setRegistrationDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-				user.setStatusId(resultSet.getInt(10));
-
-				result.add(user);
-
-			}
+			result = getListUserFromResultSet(resultSet);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -86,8 +67,7 @@ public class SQLUserDAO implements UserDAO {
 
 	@Override
 	public User getById(int userId) throws DAOException {
-		User result = new User();
-
+		User result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -98,18 +78,8 @@ public class SQLUserDAO implements UserDAO {
 			preparedStatement.setInt(1, userId);
 			resultSet = preparedStatement.executeQuery();
 
-			resultSet.next();
-			result.setId(resultSet.getInt(1));
-			result.setRoleId(resultSet.getInt(2));
-			result.setLogin(resultSet.getString(3));
-			result.setPassword(resultSet.getString(4));
-			result.setFirstName(resultSet.getString(5));
-			result.setLastName(resultSet.getString(6));
-			result.setEmail(resultSet.getString(7));
-			result.setPhone(resultSet.getString(8));
-			result.setRegistrationDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-			result.setStatusId(resultSet.getInt(10));
-
+			result = getListUserFromResultSet(resultSet).get(0);
+			
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -201,7 +171,7 @@ public class SQLUserDAO implements UserDAO {
 
 	@Override
 	public User getUserByLoginAndPassword(String login, String password) throws DAOException {
-		User result = new User();
+		User result = null;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -214,17 +184,7 @@ public class SQLUserDAO implements UserDAO {
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
 
-			resultSet.next();
-			result.setId(resultSet.getInt(1));
-			result.setRoleId(resultSet.getInt(2));
-			result.setLogin(resultSet.getString(3));
-			result.setPassword(resultSet.getString(4));
-			result.setFirstName(resultSet.getString(5));
-			result.setLastName(resultSet.getString(6));
-			result.setEmail(resultSet.getString(7));
-			result.setPhone(resultSet.getString(8));
-			result.setRegistrationDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-			result.setStatusId(resultSet.getInt(10));
+			result = getListUserFromResultSet(resultSet).get(0);
 
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
@@ -331,4 +291,32 @@ public class SQLUserDAO implements UserDAO {
 		}
 	}
 
+	/**
+	 * Initialize User type entities base on ResultSet
+	 * 
+	 * @param resultSet - base for initializing
+	 * @return ArrayList of User entities
+	 * @throws SQLException
+	 *  
+	 *  */
+	private ArrayList<User> getListUserFromResultSet(ResultSet resultSet) throws SQLException{
+		ArrayList<User> result = new ArrayList<>();
+		
+		while (resultSet.next()) {
+			User user = new User();
+			user.setId(resultSet.getInt(1));
+			user.setRoleId(resultSet.getInt(2));
+			user.setLogin(resultSet.getString(3));
+			user.setPassword(resultSet.getString(4));
+			user.setFirstName(resultSet.getString(5));
+			user.setLastName(resultSet.getString(6));
+			user.setEmail(resultSet.getString(7));
+			user.setPhone(resultSet.getString(8));
+			user.setRegistrationDate(DateConverter.convertStringToDate(resultSet.getString(9)));
+			user.setStatusId(resultSet.getInt(10));
+			
+			result.add(user);
+		}
+		return result;
+	}
 }

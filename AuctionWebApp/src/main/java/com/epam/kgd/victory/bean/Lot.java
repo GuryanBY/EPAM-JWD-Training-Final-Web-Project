@@ -1,8 +1,9 @@
 package com.epam.kgd.victory.bean;
 
+import static com.epam.kgd.victory.bean.util.CurrencyConverter.convertToCurrentCurrency;
+import static com.epam.kgd.victory.bean.util.DateConverter.convertDateToString;
+
 import java.time.LocalDateTime;
-import static com.epam.kgd.victory.util.CurrencyConverter.convertToCurrentCurrency;
-import static com.epam.kgd.victory.util.DateConverter.convertDateToString;
 
 public class Lot extends BaseBean {
 

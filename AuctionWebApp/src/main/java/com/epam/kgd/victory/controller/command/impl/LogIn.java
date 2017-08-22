@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.kgd.victory.bean.Lot;
 import com.epam.kgd.victory.bean.User;
 import com.epam.kgd.victory.controller.command.Command;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
+import com.epam.kgd.victory.controller.command.util.LocaledMessage;
 import com.epam.kgd.victory.controller.exception.ControllerException;
 import com.epam.kgd.victory.service.AdminService;
 import com.epam.kgd.victory.service.LotService;
 import com.epam.kgd.victory.service.UserService;
 import com.epam.kgd.victory.service.exception.ServiceException;
 import com.epam.kgd.victory.service.factory.ServiceFactory;
-import com.epam.kgd.victory.service.util.JSPPath;
-import com.epam.kgd.victory.service.util.LocaledMessage;
 
 public class LogIn implements Command {
 
@@ -56,13 +56,8 @@ public class LogIn implements Command {
 					request.getSession().setAttribute("BoughtLots", boughtLots);
 					/*String targetPage = JSPPath.USER_MAIN.getPath();
 					goToPage(request, response, targetPage);*/
+					response.sendRedirect(JSPPath.SUCCESS_LOGIN.getPath());
 					
-					try {
-						response.sendRedirect("jsp/success_login.jsp");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
 			} else {
 				request.setAttribute("invalidLogOrPass",
@@ -70,7 +65,7 @@ public class LogIn implements Command {
 				String targetPage = JSPPath.INDEX.getPath();
 				goToPage(request, response, targetPage);
 			}
-		} catch (ServiceException e) {
+		} catch (ServiceException | IOException e) {
 			goToPage(request, response, JSPPath.ERROR.getPath());
 		}
 	}

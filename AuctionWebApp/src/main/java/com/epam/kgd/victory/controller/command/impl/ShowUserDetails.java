@@ -9,6 +9,7 @@ import com.epam.kgd.victory.bean.Lot;
 import com.epam.kgd.victory.bean.User;
 import com.epam.kgd.victory.controller.command.Command;
 import com.epam.kgd.victory.controller.command.util.CommandUtil;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
 
 import static com.epam.kgd.victory.controller.command.util.CommandUtil.*;
 import com.epam.kgd.victory.controller.exception.ControllerException;
@@ -16,7 +17,6 @@ import com.epam.kgd.victory.service.AdminService;
 import com.epam.kgd.victory.service.LotService;
 import com.epam.kgd.victory.service.exception.ServiceException;
 import com.epam.kgd.victory.service.factory.ServiceFactory;
-import com.epam.kgd.victory.service.util.JSPPath;
 
 public class ShowUserDetails implements Command {
 	private static final int ADMIN_ROLE_ID = 1;

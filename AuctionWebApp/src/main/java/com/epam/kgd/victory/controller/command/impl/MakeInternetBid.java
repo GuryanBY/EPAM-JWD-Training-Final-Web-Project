@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.kgd.victory.bean.User;
 import com.epam.kgd.victory.controller.command.Command;
 import com.epam.kgd.victory.controller.command.util.CommandUtil;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
+import com.epam.kgd.victory.controller.command.util.LocaledMessage;
 import com.epam.kgd.victory.controller.exception.ControllerException;
 import com.epam.kgd.victory.service.UserService;
 import com.epam.kgd.victory.service.exception.ServiceException;
 import com.epam.kgd.victory.service.factory.ServiceFactory;
-import com.epam.kgd.victory.service.util.JSPPath;
-import com.epam.kgd.victory.service.util.LocaledMessage;
 import com.epam.kgd.victory.service.util.Validation;
 
-public class MakeInternetBid implements Command{
+public class MakeInternetBid implements Command {
 	private final static String PARAM_NAME_NEW_PRICE = "price";
 	private final static String PARAM_NAME_LOT_ID = "lot_id";
 
@@ -37,7 +37,7 @@ public class MakeInternetBid implements Command{
 			goToPage(request, response, pagePath);
 		}
 
-		if (isSessionValid && isBidFormValid ) {
+		if (isSessionValid && isBidFormValid) {
 			try {
 				String price = request.getParameter(PARAM_NAME_NEW_PRICE);
 				String lotId = request.getParameter(PARAM_NAME_LOT_ID);
@@ -52,11 +52,10 @@ public class MakeInternetBid implements Command{
 				goToPage(request, response, JSPPath.ERROR.getPath());
 			}
 		} else {
-			/*pagePath = JSPPath.INDEX.getPath();
-			goToPage(request, response, pagePath);*/
+			pagePath = JSPPath.INDEX.getPath();
+			goToPage(request, response, pagePath);
 		}
 
-		
 	}
 
 }

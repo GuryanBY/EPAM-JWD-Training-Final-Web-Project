@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.epam.kgd.victory.controller.command.Command;
 import com.epam.kgd.victory.controller.command.util.CommandUtil;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
+import com.epam.kgd.victory.controller.command.util.LocaledMessage;
 import com.epam.kgd.victory.controller.exception.ControllerException;
 import com.epam.kgd.victory.service.UserService;
 import com.epam.kgd.victory.service.exception.ServiceException;
 import com.epam.kgd.victory.service.factory.ServiceFactory;
-import com.epam.kgd.victory.service.util.JSPPath;
-import com.epam.kgd.victory.service.util.LocaledMessage;
 import com.epam.kgd.victory.service.util.Validation;
 
 public class Registration implements Command {

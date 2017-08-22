@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.epam.kgd.victory.bean.Lot;
-
+import com.epam.kgd.victory.bean.util.DateConverter;
 import com.epam.kgd.victory.dao.LotDAO;
 import com.epam.kgd.victory.dao.exception.DAOException;
 import com.epam.kgd.victory.dao.pool.ConnectionPool;
 import com.epam.kgd.victory.dao.pool.exception.ConnectionPoolException;
-import com.epam.kgd.victory.util.DateConverter;
 
 public class SQLLotDAO implements LotDAO {
 
@@ -23,8 +22,8 @@ public class SQLLotDAO implements LotDAO {
 	private static final String SQL_ADD_LOT = "INSERT INTO `lot` (`l_user_id_seller`, `l_good_id`, `l_auction_type_id`, `l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_buy_date`, `l_status_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_DELETE_LOT = "DELETE FROM `lot` WHERE `l_id`=?";
 	private static final String SQL_CHANGE_LOT = "UPDATE `lot` SET `l_user_id_buyer`=?, `l_user_id_seller`=?, `l_good_id`=?, `l_auction_type_id`=?, `l_name`=?, `l_good_amount`=?, `l_start_date`=?, `l_end_date`=?, `l_end_price`=?, `l_status_id`=?, `l_buy_date`=? WHERE `l_id`=?";
-	private static final String SQL_TAKE_LOTS_BY_SELLER_ID = "SELECT `l_id`, `l_user_id_buyer`, `l_user_id_seller`, `l_good_id`, `l_auction_type_id`,`l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_buy_date`, `l_status_id` FROM `lot` WHERE `l_user_id_seller` = ?";
-	private static final String SQL_TAKE_LOTS_BY_BUYER_ID = "SELECT `l_id`, `l_user_id_buyer`, `l_user_id_seller`, `l_good_id`, `l_auction_type_id`,`l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_buy_date`, `l_status_id` FROM `lot` WHERE `l_user_id_buyer` = ?";
+	private static final String SQL_TAKE_LOTS_BY_SELLER_ID = "SELECT `l_id`, `l_user_id_buyer`, `l_user_id_seller`, `l_good_id`, `l_auction_type_id`,`l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_status_id`, `l_buy_date` FROM `lot` WHERE `l_user_id_seller` = ?";
+	private static final String SQL_TAKE_LOTS_BY_BUYER_ID = "SELECT `l_id`, `l_user_id_buyer`, `l_user_id_seller`, `l_good_id`, `l_auction_type_id`,`l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_status_id`, `l_buy_date` FROM `lot` WHERE `l_user_id_buyer` = ?";
 	private static final String SQL_TAKE_ACTIVE_LOTS_BY_TYPE = "SELECT `l_id`, `l_user_id_buyer`, `l_user_id_seller`, `l_good_id`, `l_auction_type_id`,`l_name`, `l_good_amount`, `l_start_date`, `l_end_date`, `l_end_price`, `l_status_id`,`l_buy_date`  FROM `lot` WHERE `l_status_id`<> '1' AND  `l_auction_type_id`=? AND `l_buy_date`  IS NULL;";
 	private static final String SQL_CHANGE_LOT_STATUS = "UPDATE `lot` SET `l_status_id`=? WHERE `l_id`=?;";
 	private static final String SQL_TAKE_LOT_STATUS = "SELECT `l_status_id` FROM `lot` WHERE `l_id`=?;";
@@ -33,7 +32,7 @@ public class SQLLotDAO implements LotDAO {
 
 	@Override
 	public List<Lot> getAll() throws DAOException {
-		List<Lot> result = new ArrayList<>();
+		List<Lot> result = null;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -41,24 +40,8 @@ public class SQLLotDAO implements LotDAO {
 			connection = CONNECTION_POOL.takeConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(SQL_TAKE_ALL_LOTS);
-
-			while (resultSet.next()) {
-				Lot lot = new Lot();
-				lot.setId(resultSet.getInt(1));
-				lot.setBuyerId(resultSet.getInt(2));
-				lot.setSellerId(resultSet.getInt(3));
-				lot.setGoodId(resultSet.getInt(4));
-				lot.setAuctionTypeId(resultSet.getString(5));
-				lot.setLotName(resultSet.getString(6));
-				lot.setGoodAmount(resultSet.getInt(7));
-				lot.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
-				lot.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-				lot.setEndPrice(resultSet.getDouble(10));
-				lot.setStatusId(resultSet.getInt(11));
-				lot.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(12)));
-
-				result.add(lot);
-			}
+			
+			result = getListLotFromResultSet(resultSet);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -70,7 +53,7 @@ public class SQLLotDAO implements LotDAO {
 
 	@Override
 	public Lot getById(int lotId) throws DAOException {
-		Lot result = new Lot();
+		Lot result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -81,20 +64,8 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement.setInt(1, lotId);
 			resultSet = preparedStatement.executeQuery();
 
-			resultSet.next();
-
-			result.setId(resultSet.getInt(1));
-			result.setBuyerId(resultSet.getInt(2));
-			result.setSellerId(resultSet.getInt(3));
-			result.setGoodId(resultSet.getInt(4));
-			result.setAuctionTypeId(resultSet.getString(5));
-			result.setLotName(resultSet.getString(6));
-			result.setGoodAmount(resultSet.getInt(7));
-			result.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
-			result.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-			result.setEndPrice(resultSet.getDouble(10));
-			result.setStatusId(resultSet.getInt(11));
-			result.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(12)));
+			result = getListLotFromResultSet(resultSet).get(0);
+		
 
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
@@ -113,7 +84,6 @@ public class SQLLotDAO implements LotDAO {
 		try {
 			connection = CONNECTION_POOL.takeConnection();
 			preparedStatement = connection.prepareStatement(SQL_ADD_LOT);
-			//preparedStatement.setInt(1, lot.getBuyerId());
 			preparedStatement.setInt(1, lot.getSellerId());
 			preparedStatement.setInt(2, lot.getGoodId());
 			preparedStatement.setString(3, lot.getAuctionTypeId());
@@ -125,7 +95,6 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement.setString(9, DateConverter.convertDateToString(lot.getBuyingDate()));
 			preparedStatement.setInt(10, lot.getStatusId());
 			preparedStatement.executeUpdate();
-
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -144,7 +113,6 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement = connection.prepareStatement(SQL_DELETE_LOT);
 			preparedStatement.setInt(1, lotId);
 			preparedStatement.executeUpdate();
-
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -198,24 +166,7 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement.setInt(1, sellerId);
 			resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-				Lot lot = new Lot();
-				lot.setId(resultSet.getInt(1));
-				lot.setBuyerId(resultSet.getInt(2));
-				lot.setSellerId(resultSet.getInt(3));
-				lot.setGoodId(resultSet.getInt(4));
-				lot.setAuctionTypeId(resultSet.getString(5));
-				lot.setLotName(resultSet.getString(6));
-				lot.setGoodAmount(resultSet.getInt(7));
-				lot.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
-				lot.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-				lot.setEndPrice(resultSet.getDouble(10));
-				lot.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(11)));
-				lot.setStatusId(resultSet.getInt(12));
-
-				result.add(lot);
-
-			}
+			result = getListLotFromResultSet(resultSet);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -227,7 +178,7 @@ public class SQLLotDAO implements LotDAO {
 
 	@Override
 	public List<Lot> getLotsByBuyerId(int buyerId) throws DAOException {
-		List<Lot> result = new ArrayList<>();
+		List<Lot> result =null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -238,24 +189,7 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement.setInt(1, buyerId);
 			resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-				Lot lot = new Lot();
-				lot.setId(resultSet.getInt(1));
-				lot.setBuyerId(resultSet.getInt(2));
-				lot.setSellerId(resultSet.getInt(3));
-				lot.setGoodId(resultSet.getInt(4));
-				lot.setAuctionTypeId(resultSet.getString(5));
-				lot.setLotName(resultSet.getString(6));
-				lot.setGoodAmount(resultSet.getInt(7));
-				lot.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
-				lot.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-				lot.setEndPrice(resultSet.getDouble(10));
-				lot.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(11)));
-				lot.setStatusId(resultSet.getInt(12));
-
-				result.add(lot);
-
-			}
+			result = getListLotFromResultSet(resultSet);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -264,34 +198,10 @@ public class SQLLotDAO implements LotDAO {
 
 		return result;
 	}
-
-	private void closeResources(ResultSet rs, Statement st, Connection con) throws DAOException {
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				throw new DAOException("Can't close ResultSet", e);
-			}
-		}
-		if (st != null) {
-			try {
-				st.close();
-			} catch (SQLException e) {
-				throw new DAOException("Can't close Statement", e);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				throw new DAOException("Can't close Connection", e);
-			}
-		}
-	}
-
+	
 	@Override
 	public List<Lot> takeActiveNotSoldLotsByAucType(int auctionTypeId) throws DAOException {
-		List<Lot> result = new ArrayList<>();
+		List<Lot> result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -302,24 +212,7 @@ public class SQLLotDAO implements LotDAO {
 			preparedStatement.setInt(1, auctionTypeId);
 			resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next()) {
-				Lot lot = new Lot();
-				lot.setId(resultSet.getInt(1));
-				lot.setBuyerId(resultSet.getInt(2));
-				lot.setSellerId(resultSet.getInt(3));
-				lot.setGoodId(resultSet.getInt(4));
-				lot.setAuctionTypeId(resultSet.getString(5));
-				lot.setLotName(resultSet.getString(6));
-				lot.setGoodAmount(resultSet.getInt(7));
-				lot.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
-				lot.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
-				lot.setEndPrice(resultSet.getDouble(10));
-				lot.setStatusId(resultSet.getInt(11));
-				lot.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(12)));
-
-				result.add(lot);
-
-			}
+			result = getListLotFromResultSet(resultSet);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -393,5 +286,60 @@ public class SQLLotDAO implements LotDAO {
 			closeResources(resultSet, preparedStatement, connection);
 		}
 	}
+	
+    private void closeResources(ResultSet rs, Statement st, Connection con) throws DAOException {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				throw new DAOException("Can't close ResultSet", e);
+			}
+		}
+		if (st != null) {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				throw new DAOException("Can't close Statement", e);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				throw new DAOException("Can't close Connection", e);
+			}
+		}
+	}
+	
+	/**
+	 * Initialize Lot type entities base on ResultSet
+	 * 
+	 * @param resultSet - base for initializing
+	 * @return ArrayList of Lot entities
+	 * @throws SQLException
+	 * 
+	 *  
+	 *  */
+    private ArrayList<Lot> getListLotFromResultSet(ResultSet resultSet) throws SQLException{
+    	ArrayList<Lot> result = new ArrayList<>();
+    	
+    	while (resultSet.next()) {
+			Lot lot = new Lot();
+			lot.setId(resultSet.getInt(1));
+			lot.setBuyerId(resultSet.getInt(2));
+			lot.setSellerId(resultSet.getInt(3));
+			lot.setGoodId(resultSet.getInt(4));
+			lot.setAuctionTypeId(resultSet.getString(5));
+			lot.setLotName(resultSet.getString(6));
+			lot.setGoodAmount(resultSet.getInt(7));
+			lot.setStartSellingDate(DateConverter.convertStringToDate(resultSet.getString(8)));
+			lot.setEndSellingDate(DateConverter.convertStringToDate(resultSet.getString(9)));
+			lot.setEndPrice(resultSet.getDouble(10));
+			lot.setStatusId(resultSet.getInt(11));
+			lot.setBuyingDate(DateConverter.convertStringToDate(resultSet.getString(12)));
 
+			result.add(lot);
+		}
+      	return result;
+    }
 }

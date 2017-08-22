@@ -22,7 +22,7 @@ public final class Controller extends HttpServlet {
 	private final CommandProvider provider = new CommandProvider();
 
 	/** The logger. */
-	static Logger logger = Logger.getLogger(Controller.class);
+	private static Logger LOGGER = Logger.getLogger(Controller.class);
 
 	/** The Constant command. */
 	private static final String PARAM_NAME_COMMAND = "command";
@@ -32,12 +32,7 @@ public final class Controller extends HttpServlet {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.
-	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -60,7 +55,7 @@ public final class Controller extends HttpServlet {
 			Command command = provider.getCommand(commandName);
 			command.execute(request, response);
 		} catch (ControllerException e) {
-			//logger.error("ControllerException");
+			LOGGER.error("Can't do method", e);
 		}
 
 	}

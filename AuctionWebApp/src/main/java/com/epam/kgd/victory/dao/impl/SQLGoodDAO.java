@@ -25,9 +25,8 @@ public class SQLGoodDAO implements GoodDAO {
 	private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
 	@Override
-	public List<Good> getAll() throws DAOException, RuntimeException {
-		List<Good> result = new ArrayList<>();
-
+	public List<Good> getAll() throws DAOException {
+		List<Good> result = null;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -35,19 +34,9 @@ public class SQLGoodDAO implements GoodDAO {
 			connection = CONNECTION_POOL.takeConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(SQL_TAKE_ALL_GOODS);
+			
+			result = getListGoodFromResultSet(resultSet);
 
-			while (resultSet.next()) {
-				Good good = new Good();
-				good.setId(resultSet.getInt(1));
-				good.setCategoryId(resultSet.getInt(2));
-				good.setConditionId(resultSet.getInt(3));
-				good.setName(resultSet.getString(4));
-				good.setDescription(resultSet.getString(5));
-				good.setStartPrice(resultSet.getDouble(6));
-
-				result.add(good);
-
-			}
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -58,7 +47,7 @@ public class SQLGoodDAO implements GoodDAO {
 
 	@Override
 	public Good getById(int goodId) throws DAOException {
-		Good result = new Good();
+		Good result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -69,14 +58,8 @@ public class SQLGoodDAO implements GoodDAO {
 			preparedStatement.setInt(1, goodId);
 			resultSet = preparedStatement.executeQuery();
 
-			resultSet.next();
-			result.setId(resultSet.getInt(1));
-			result.setCategoryId(resultSet.getInt(2));
-			result.setConditionId(resultSet.getInt(3));
-			result.setName(resultSet.getString(4));
-			result.setDescription(resultSet.getString(5));
-			result.setStartPrice(resultSet.getDouble(6));
-
+			result = getListGoodFromResultSet(resultSet).get(0);
+	
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -214,4 +197,29 @@ public class SQLGoodDAO implements GoodDAO {
 		}
 	}
 
+	/**
+	 * Initialize Good type entities base on ResultSet
+	 * 
+	 * @param resultSet - base for initializing
+	 * @return ArrayList of Good entities
+	 * @throws SQLException
+	 *  */
+	private ArrayList<Good> getListGoodFromResultSet(ResultSet resultSet) throws SQLException{
+		ArrayList<Good> result = new ArrayList<>();
+		while (resultSet.next()) {
+			Good good = new Good();
+			good.setId(resultSet.getInt(1));
+			good.setCategoryId(resultSet.getInt(2));
+			good.setConditionId(resultSet.getInt(3));
+			good.setName(resultSet.getString(4));
+			good.setDescription(resultSet.getString(5));
+			good.setStartPrice(resultSet.getDouble(6));
+
+			result.add(good);
+			
+		}
+		return result;
+		
+		
+	}
 }

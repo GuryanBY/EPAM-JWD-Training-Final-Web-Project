@@ -12,18 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.kgd.victory.bean.User;
 import com.epam.kgd.victory.controller.command.Command;
 import com.epam.kgd.victory.controller.command.util.CommandUtil;
+import com.epam.kgd.victory.controller.command.util.JSPPath;
+import com.epam.kgd.victory.controller.command.util.LocaledMessage;
 import com.epam.kgd.victory.controller.exception.ControllerException;
 import com.epam.kgd.victory.service.UserService;
 import com.epam.kgd.victory.service.exception.ServiceException;
 import com.epam.kgd.victory.service.factory.ServiceFactory;
-import com.epam.kgd.victory.service.util.JSPPath;
-import com.epam.kgd.victory.service.util.LocaledMessage;
 import com.epam.kgd.victory.service.util.Validation;
 
 public class MakeBid implements Command {
 	private final static String PARAM_NAME_NEW_PRICE = "new_price";
 	private final static String PARAM_NAME_LOT_ID = "lot_id";
-	//private final static int BID_SUCCESS = 1;
+	
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
