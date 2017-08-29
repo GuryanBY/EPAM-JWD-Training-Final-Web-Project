@@ -1,8 +1,0 @@
-<div id="header">
-	<div class="container">
-		<div class="logo">
-			
-			<img src="<c:url value="/images/logo.png"/>" alt="Logo" />
-		</div>
-	</div>
-</div>
