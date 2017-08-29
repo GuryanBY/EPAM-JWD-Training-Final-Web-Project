@@ -1,0 +1,60 @@
+<div class="footer">
+	<div class="container">
+		<div class="one_fourth">
+			<h3>${index_footer_contactinfo }</h3>
+			<p>
+				<span class="orange"><strong> ${index_footer_address }:</strong></span>
+				<br> ${index_footer_addressfull }
+			</p>
+			<p>
+				<span class="orange"><strong>
+						${index_footer_telephone }:</strong></span> <br> +375 (17) 236 2587<br>
+			</p>
+			<p>
+				<span class="orange"><strong>E-mail:</strong></span> <br>
+				info@a-auction.com<br>
+			</p>
+		</div>
+		<!-- four columns ends here -->
+		<div class="one_fourth">
+			<h3>${index_footer_departments }</h3>
+			<ul>
+				<li><a href="#" title=""> ${index_footer_sale }</a></li>
+				<li><a href="#" class=""> ${index_footer_buy }</a></li>
+				<li><a href="#" class=""> ${index_footer_ads }</a></li>
+				<li><a href="#" class=""> ${index_footer_marketing }</a></li>
+				<li><a href="#" class=""> ${index_footer_investment }</a></li>
+			</ul>
+		</div>
+
+		<div class="one_fourth">
+			<h3>${index_footer_archive }</h3>
+			<ul>
+				<li><a href="#" class=""> ${index_footer_apr }</a></li>
+				<li><a href="#" class=""> ${index_footer_march }</a></li>
+				<li><a href="#" class="">${index_footer_feb }</a></li>
+				<li><a href="#" class="">${index_footer_jan }</a></li>
+
+			</ul>
+		</div>
+
+		<div class="one_fourth lastcolumn">
+			<h3>${index_footer_name }1967&#8212;2017</h3>
+			<p>${index_footer_desc }</p>
+			<p>
+				<a href="#" rel="nofollow">
+					${index_footer_descinfo }</a>
+			</p>
+		</div>
+
+	</div>
+</div>
+
+<div id="copyright">
+	<div class="container">
+		<p class="copyright">
+			&copy; Copyright 2017. ${index_footer_dev } <a
+				href="http://www.facebook.com/user/" rel="nofollow">Guryan</a>.
+		</p>
+	</div>
+</div>

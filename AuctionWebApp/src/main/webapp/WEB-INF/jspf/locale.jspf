@@ -1,0 +1,192 @@
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="resources.locale"/>
+
+<fmt:message key="index.title"                      var="index_title"></fmt:message>
+<fmt:message key="index.login.submit"               var="index_login_submit"></fmt:message>
+<fmt:message key="index.login.placeholder.login"    var="index_login_placeholder_login"></fmt:message>
+<fmt:message key="index.login.placeholder.password" var="index_login_placeholder_password"></fmt:message>
+<fmt:message key="index.register"                   var="index_register"></fmt:message>
+<fmt:message key="index.header.main"                var="index_header_main"></fmt:message>
+<fmt:message key="index.header.auctions"            var="index_header_auctions"></fmt:message>
+<fmt:message key="index.header.results"             var="index_header_results"></fmt:message>
+<fmt:message key="index.header.type1"               var="index_header_type1"></fmt:message>
+<fmt:message key="index.header.type2"               var="index_header_type2"></fmt:message>
+<fmt:message key="index.header.type3"               var="index_header_type3"></fmt:message>
+<fmt:message key="index.header.gallery"             var="index_header_gallery"></fmt:message>
+<fmt:message key="index.header.gallery.news1"       var="index_header_gallery_news1"></fmt:message>
+<fmt:message key="index.header.gallery.news2"       var="index_header_gallery_news2"></fmt:message>
+<fmt:message key="index.header.gallery.news3"       var="index_header_gallery_news3"></fmt:message>
+<fmt:message key="index.header.contacts"            var="index_header_contacts"></fmt:message>
+<fmt:message key="index.header.maps"                var="index_header_maps"></fmt:message>
+<fmt:message key="index.header.menu"                var="index_header_menu"></fmt:message>
+<fmt:message key="index.socialise"                  var="index_socialise"></fmt:message>
+<fmt:message key="index.footer.contactinfo"         var="index_footer_contactinfo"></fmt:message>
+<fmt:message key="index.footer.address"             var="index_footer_address"></fmt:message>
+<fmt:message key="index.footer.addressfull"         var="index_footer_addressfull"></fmt:message>
+<fmt:message key="index.footer.telephone"           var="index_footer_telephone"></fmt:message>
+<fmt:message key="index.footer.departments"         var="index_footer_departments"></fmt:message>
+<fmt:message key="index.footer.sale"                var="index_footer_sale"></fmt:message>
+<fmt:message key="index.footer.buy"                 var="index_footer_buy"></fmt:message>
+<fmt:message key="index.footer.ads"                 var="index_footer_ads"></fmt:message>
+<fmt:message key="index.footer.marketing"           var="index_footer_marketing"></fmt:message>
+<fmt:message key="index.footer.investment"          var="index_footer_investment"></fmt:message>
+<fmt:message key="index.footer.archive"             var="index_footer_archive"></fmt:message>
+<fmt:message key="index.footer.apr"                 var="index_footer_apr"></fmt:message>
+<fmt:message key="index.footer.march"               var="index_footer_march"></fmt:message>
+<fmt:message key="index.footer.feb"                 var="index_footer_feb"></fmt:message>
+<fmt:message key="index.footer.jan"                 var="index_footer_jan"></fmt:message>
+<fmt:message key="index.footer.name"                var="index_footer_name"></fmt:message>
+<fmt:message key="index.footer.desc"                var="index_footer_desc"></fmt:message>
+<fmt:message key="index.footer.descinfo"            var="index_footer_descinfo"></fmt:message>
+<fmt:message key="index.footer.dev"                 var="index_footer_dev"></fmt:message>
+
+<fmt:message key="content.mainttitle"     var="content_mainttitle"></fmt:message>
+<fmt:message key="content.phrase"         var="content_phrase"></fmt:message>
+<fmt:message key="content.lot1.title"     var="content_lot1_title"></fmt:message>
+<fmt:message key="content.lot1.content"   var="content_lot1_content"></fmt:message>
+<fmt:message key="content.lot2.title"     var="content_lot2_title"></fmt:message>
+<fmt:message key="content.lot2.content"   var="content_lot2_content"></fmt:message>
+<fmt:message key="content.lot3.title"     var="content_lot3_title"></fmt:message>
+<fmt:message key="content.lot3.content"   var="content_lot3_content"></fmt:message>
+<fmt:message key="content.title2"         var="content_title2"></fmt:message>
+<fmt:message key="content.phrase2"        var="content_phrase2"></fmt:message>
+<fmt:message key="content.fig"            var="content_fig"></fmt:message>
+<fmt:message key="content.qwestion1"      var="content_qwestion1"></fmt:message>
+<fmt:message key="content.answ1"          var="content_answ1"></fmt:message>
+<fmt:message key="content.question2"      var="content_question2"></fmt:message>
+<fmt:message key="content.answ2"          var="content_answ2"></fmt:message>
+<fmt:message key="content.answ3"          var="content_answ3"></fmt:message>
+<fmt:message key="content.answ4"          var="content_answ4"></fmt:message>
+<fmt:message key="content.answ5"          var="content_answ5"></fmt:message>
+<fmt:message key="content.question3"      var="content_question3"></fmt:message>
+<fmt:message key="content.question4"      var="content_question4"></fmt:message>
+<fmt:message key="content.question5"      var="content_question5"></fmt:message>
+<fmt:message key="content.news.title"     var="content_news_title"></fmt:message>
+<fmt:message key="content.news.q1"        var="content_news_q1"></fmt:message>
+<fmt:message key="content.news.q2"        var="content_news_q2"></fmt:message>
+<fmt:message key="content.news.q3"        var="content_news_q3"></fmt:message>
+<fmt:message key="content.news.a1"        var="content_news_a1"></fmt:message>
+<fmt:message key="content.news.a2"        var="content_news_a2"></fmt:message>
+<fmt:message key="content.news.a3"        var="content_news_a3"></fmt:message>
+<fmt:message key="content.news.l1"        var="content_news_l1"></fmt:message>
+<fmt:message key="content.news.l2"        var="content_news_l2"></fmt:message>
+<fmt:message key="content.news.l3"        var="content_news_l3"></fmt:message>
+
+<fmt:message key="user.main.title"            var="user_main_title"></fmt:message>
+<fmt:message key="user.main.hello"            var="user_main_hello"></fmt:message>
+<fmt:message key="user.main.selling"          var="user_main_selling"></fmt:message>
+<fmt:message key="user.main.empty"            var="user_main_empty"></fmt:message>
+<fmt:message key="user.main.lotname"          var="user_main_lotname"></fmt:message>
+<fmt:message key="user.main.goodamount"       var="user_main_goodamount"></fmt:message>
+<fmt:message key="user.main.startdate"        var="user_main_startdate"></fmt:message>
+<fmt:message key="user.main.cost"             var="user_main_cost"></fmt:message>
+<fmt:message key="user.main.bying"            var="user_main_bying"></fmt:message>
+<fmt:message key="user.main.emptybying"       var="user_main_emptybying"></fmt:message>
+<fmt:message key="user.main.enddate"          var="user_main_enddate"></fmt:message>
+<fmt:message key="user.main.logout"           var="user_main_logout"></fmt:message>
+<fmt:message key="user.main.internetauction"  var="user_main_internetauction"></fmt:message>
+<fmt:message key="user.main.englandauction"   var="user_main_englandauction"></fmt:message>
+<fmt:message key="user.main.blitzauction"     var="user_main_blitzauction"></fmt:message>
+
+<fmt:message key="reg.title"              var="reg_title"></fmt:message>
+<fmt:message key="reg.firstname"          var="reg_firstname"></fmt:message>
+<fmt:message key="reg.lastname"           var="reg_lastname"></fmt:message>
+<fmt:message key="reg.age"                var="reg_age"></fmt:message>
+<fmt:message key="reg.phone"              var="reg_phone"></fmt:message>
+<fmt:message key="reg.placeholder.format" var="reg_placeholder_format"></fmt:message>
+<fmt:message key="reg.login"              var="reg_login"></fmt:message>
+<fmt:message key="reg.placeholder"        var="reg_placeholder"></fmt:message>
+<fmt:message key="reg.password"           var="reg_password"></fmt:message>
+<fmt:message key="reg.password.again"     var="reg_password_again"></fmt:message>
+<fmt:message key="reg.submit"             var="reg_submit"></fmt:message>
+<fmt:message key="reg.more"               var="reg_more"></fmt:message>
+<fmt:message key="reg.add.good"           var="reg_add_good"></fmt:message>
+
+<fmt:message key="add.good.title"       var="add_good_title"></fmt:message>
+<fmt:message key="add.good.category"    var="add_good_category"></fmt:message>
+<fmt:message key="add.good.category1"   var="add_good_category1"></fmt:message>
+<fmt:message key="add.good.category2"   var="add_good_category2"></fmt:message>
+<fmt:message key="add.good.category3"   var="add_good_category3"></fmt:message>
+<fmt:message key="add.good.category4"   var="add_good_category4"></fmt:message>
+<fmt:message key="add.good.category5"   var="add_good_category5"></fmt:message>
+<fmt:message key="add.good.category6"   var="add_good_category6"></fmt:message>
+<fmt:message key="add.good.category7"   var="add_good_category7"></fmt:message>
+<fmt:message key="add.good.category8"   var="add_good_category8"></fmt:message>
+<fmt:message key="add.good.category19"  var="add_good_category19"></fmt:message>
+<fmt:message key="add.good.condition"   var="add_good_condition"></fmt:message>
+<fmt:message key="add.good.condition1"  var="add_good_condition1"></fmt:message>
+<fmt:message key="add.good.condition2"  var="add_good_condition2"></fmt:message>
+<fmt:message key="add.good.condition3"  var="add_good_condition3"></fmt:message>
+<fmt:message key="add.good.condition4"  var="add_good_condition4"></fmt:message>
+<fmt:message key="add.good.name"        var="add_good_name"></fmt:message>
+<fmt:message key="add.good.description" var="add_good_description"></fmt:message>
+<fmt:message key="add.good.price"       var="add_good_price"></fmt:message>
+<fmt:message key="add.good.submit"      var="add_good_submit"></fmt:message>
+<fmt:message key="add.good.duration"    var="add_good_duration"></fmt:message>
+<fmt:message key="add.good.days"        var="add_good_days"></fmt:message>
+<fmt:message key="add.good.amount"      var="add_good_amount"></fmt:message>
+<fmt:message key="add.good.type"        var="add_good_type"></fmt:message>
+<fmt:message key="add.good.type1"       var="add_good_type1"></fmt:message>
+<fmt:message key="add.good.type2"       var="add_good_type2"></fmt:message>
+<fmt:message key="add.good.type3"       var="add_good_type3"></fmt:message>
+
+
+<fmt:message key="operation.title"           var="operation_title"></fmt:message>
+<fmt:message key="operation.text.success"    var="operation_text_success"></fmt:message>
+<fmt:message key="operation.text.continue"   var="operation_text_continue"></fmt:message>
+<fmt:message key="operation.button.continue" var="operation_button_continue"></fmt:message>
+
+<fmt:message key="blitz.title"             var="blitz_title"></fmt:message>
+<fmt:message key="blitz.maintitle"         var="blitz_maintitle"></fmt:message>
+<fmt:message key="blitz.table.name"        var="blitz_table_name"></fmt:message>
+<fmt:message key="blitz.table.startdate"   var="blitz_table_startdate"></fmt:message>
+<fmt:message key="blitz.table.price"       var="blitz_table_price"></fmt:message>
+<fmt:message key="blitz.table.buy"         var="blitz_table_buy"></fmt:message>
+<fmt:message key="blitz.table.buttom"      var="blitz_table_buttom"></fmt:message>
+<fmt:message key="blitz.noactivelots"      var="blitz_noactivelots"></fmt:message>
+<fmt:message key="blitz.rule.title"        var="blitz_rule_title"></fmt:message>
+<fmt:message key="blitz.rule.content"      var="blitz_rule_content"></fmt:message>
+
+<fmt:message key="eng.title"              var="eng_title"></fmt:message>
+<fmt:message key="eng.maintitle"          var="eng_maintitle"></fmt:message>
+<fmt:message key="eng.noactivelots"       var="eng_noactivelots"></fmt:message>
+<fmt:message key="eng.table.name"         var="eng_table_name"></fmt:message>
+<fmt:message key="eng.table.startdate"    var="eng_table_startdate"></fmt:message>
+<fmt:message key="eng.table.winbid"       var="eng_table_winbid"></fmt:message>
+<fmt:message key="eng.table.bid"          var="eng_table_bid"></fmt:message>
+<fmt:message key="eng.table.suggestbid"   var="eng_table_suggestbid"></fmt:message>
+<fmt:message key="eng.table.currentwin"   var="eng_table_currentwin"></fmt:message>
+<fmt:message key="eng.rule.title"         var="eng_rule_title"></fmt:message>
+<fmt:message key="eng.rule.content"       var="eng_rule_content"></fmt:message>
+
+<fmt:message key="internet.title"              var="internet_title"></fmt:message>
+<fmt:message key="internet.maintitle"          var="internet_maintitle"></fmt:message>
+<fmt:message key="internet.rule.title"         var="internet_rule_title"></fmt:message>
+<fmt:message key="internet.rule.content"       var="internet_rule_content"></fmt:message>
+<fmt:message key="internet.emptylots"          var="internet_emptylots"></fmt:message>
+<fmt:message key="internet.table.name"         var="internet_table_name"></fmt:message>
+<fmt:message key="internet.table.startdate"    var="internet_table_startdate"></fmt:message>
+<fmt:message key="internet.table.enddate"      var="internet_table_enddate"></fmt:message>
+<fmt:message key="internet.table.price"        var="internet_table_price"></fmt:message>
+<fmt:message key="internet.table.sellerinfo"   var="internet_table_sellerinfo"></fmt:message>
+<fmt:message key="internet.table.showcontacts" var="internet_table_showcontacts"></fmt:message>
+
+<fmt:message key="internet.sellerdetails.title"        var="internet_sellerdetails_title"></fmt:message>
+<fmt:message key="internet.sellerdetails.subtitle"     var="internet_sellerdetails_subtitle"></fmt:message>
+<fmt:message key="internet.sellerdetails.content"      var="internet_sellerdetails_content"></fmt:message>
+<fmt:message key="internet.sellerdetails.sellername"   var="internet_sellerdetails_sellername"></fmt:message>
+<fmt:message key="internet.sellerdetails.sellerphone"  var="internet_sellerdetails_sellerphone"></fmt:message>
+<fmt:message key="internet.sellerdetails.selleremail"  var="internet_sellerdetails_selleremail"></fmt:message>
+
+<fmt:message key="login.success.title"     var="login_success_title"></fmt:message>
+<fmt:message key="login.success.message"   var="login_success_message"></fmt:message>
+<fmt:message key="login.success.button"    var="login_success_button"></fmt:message>
+
+
+
+
+
+
+
+
+
